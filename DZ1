@@ -103,11 +103,10 @@ def execute_action(choice):
         #комит 3
     elif choice == 6:
         print("Завершение работы...")
-        # Здесь можно написать код для закрытия программы
-        #file.close("phon.txt")
+        #file.close()
     else:
         print("Неверный выбор. Повторите попытку.")
         
 execute_action(choice)
-
+#комит 4
 
