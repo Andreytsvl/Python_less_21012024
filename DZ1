@@ -63,6 +63,19 @@ def add_entry(phonebook, last_name, first_name, phone_number, description):
         "description": description
     }
     phonebook.append(entry)
+    print('вы желаете сохранить данные? Введите 1, если да')
+    a= int(input())
+    if a == 1:
+        save_phonebook(phonebook)
+    else:
+        print('ну, как хотите')
+        
+    
+def save_phonebook(phonebook):
+    with open("phon.txt", "w", encoding='utf-8') as file:
+        for entry in phonebook:
+            line = "{},{},{},{}\n".format(entry["last_name"], entry["first_name"], entry["phone_number"], entry["description"])
+            file.write(line)
 
 def execute_action(choice):
     if choice == 1:
@@ -83,10 +96,11 @@ def execute_action(choice):
         phone_number = input('введите номер телефона ')
         description = input('введите описание ')
         add_entry(phonebook, last_name, first_name, phone_number, description)
-        print(phonebook)# проверим, записалось ли
+        #print(phonebook)# проверим, записалось ли
         #комит 2
     elif choice == 5:
         save_phonebook(phonebook)
+        #комит 3
     elif choice == 6:
         print("Завершение работы...")
         # Здесь можно написать код для закрытия программы
