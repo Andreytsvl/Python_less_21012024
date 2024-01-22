@@ -10,7 +10,7 @@ def read_phonebook():
                 "phone_number": phone_number,
                 "description": description
             }
-            #print(entry)
+            #print(entry) #что такое энтри?
             # Добавляем словарь в список
             phonebook.append(entry)
      
@@ -31,7 +31,7 @@ def show_phonebook(phonebook):
         print("Описание:", entry["description"])
         print("----------------------")  
 
-#show_phonebook(phonebook)
+#show_phonebook(phonebook) #проверили, что работает
 print("\nВыберите необходимое действие:\n"
         "1. Отобразить весь справочник\n"
         "2. Найти абонента по фамилии\n"
@@ -48,6 +48,22 @@ def search_by_last_name(phonebook, last_name):
             results.append(entry)
     return results
 
+def search_by_phone_number(phonebook, phone_number):
+    results = []
+    for entry in phonebook:
+        if entry["phone_number"] == phone_number:
+            results.append(entry)
+    return results
+
+def add_entry(phonebook, last_name, first_name, phone_number, description):
+    entry = {
+        "last_name": last_name,
+        "first_name": first_name,
+        "phone_number": phone_number,
+        "description": description
+    }
+    phonebook.append(entry)
+
 def execute_action(choice):
     if choice == 1:
         show_phonebook(phonebook)
@@ -55,12 +71,20 @@ def execute_action(choice):
         last_name = input("Введите фамилию для поиска: ")
         results = search_by_last_name(phonebook, last_name)
         show_phonebook(results)
-        
+        # первый комит
     elif choice == 3:
         phone_number = input("Введите номер телефона для поиска: ")
-        search_by_phone_number(phone_number, phonebook)
+        results = search_by_phone_number(phonebook, phone_number)
+        show_phonebook(results)
+        
     elif choice == 4:
-        add_entry(phonebook)
+        last_name = input('введите фамилию ')
+        first_name = input('введите имя ')
+        phone_number = input('введите номер телефона ')
+        description = input('введите описание ')
+        add_entry(phonebook, last_name, first_name, phone_number, description)
+        print(phonebook)# проверим, записалось ли
+        #комит 2
     elif choice == 5:
         save_phonebook(phonebook)
     elif choice == 6:
