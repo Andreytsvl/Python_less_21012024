@@ -1,0 +1,75 @@
+def read_phonebook():
+    phonebook = []
+    with open("phon.txt", "r", encoding='utf-8') as file:
+        for line in file:
+            # Разделяем строку на части и создаем словарь
+            last_name, first_name, phone_number, description = line.strip().split(",")
+            entry = {
+                "last_name": last_name,
+                "first_name": first_name,
+                "phone_number": phone_number,
+                "description": description
+            }
+            #print(entry)
+            # Добавляем словарь в список
+            phonebook.append(entry)
+     
+    return phonebook
+
+# Сохраняем результат вызова функции в переменную
+phonebook = read_phonebook()
+
+# Теперь можно печатать переменную phonebook
+#print(phonebook)
+
+def show_phonebook(phonebook):
+    print("\nВесь справочник:")
+    for entry in phonebook:
+        print("Фамилия:", entry["last_name"])
+        print("Имя:", entry["first_name"])
+        print("Номер телефона:", entry["phone_number"])
+        print("Описание:", entry["description"])
+        print("----------------------")  
+
+#show_phonebook(phonebook)
+print("\nВыберите необходимое действие:\n"
+        "1. Отобразить весь справочник\n"
+        "2. Найти абонента по фамилии\n"
+        "3. Найти абонента по номеру телефона\n"
+        "4. Добавить абонента в справочник\n"
+        "5. Сохранить справочник в текстовом формате\n"
+        "6. Закончить работу")
+choice = int(input())
+
+def search_by_last_name(phonebook, last_name):
+    results = []
+    for entry in phonebook:
+        if entry["last_name"] == last_name:
+            results.append(entry)
+    return results
+
+def execute_action(choice):
+    if choice == 1:
+        show_phonebook(phonebook)
+    elif choice == 2:
+        last_name = input("Введите фамилию для поиска: ")
+        results = search_by_last_name(phonebook, last_name)
+        show_phonebook(results)
+        
+    elif choice == 3:
+        phone_number = input("Введите номер телефона для поиска: ")
+        search_by_phone_number(phone_number, phonebook)
+    elif choice == 4:
+        add_entry(phonebook)
+    elif choice == 5:
+        save_phonebook(phonebook)
+    elif choice == 6:
+        print("Завершение работы...")
+        # Здесь можно написать код для закрытия программы
+        #file.close("phon.txt")
+    else:
+        print("Неверный выбор. Повторите попытку.")
+        
+execute_action(choice)
+
+
