@@ -109,4 +109,38 @@ def execute_action(choice):
         
 execute_action(choice)
 #комит 4
+#дополнить файл возможностью копирования данных из одного файла в другой
+def copy_line(source_file, target_file, line_number):
+    # Открываем исходный файл для чтения
+    with open(source_file, 'r',encoding='utf-8') as source:
+        # Читаем все строки из исходного файла
+        lines = source.readlines()
 
+        # Проверяем, что номер строки в допустимых пределах
+        if 1 <= line_number <= len(lines):
+            # Открываем целевой файл для записи
+            with open(target_file, 'a', encoding='utf-8') as target:
+                # Копируем выбранную строку в целевой файл
+                target.write(lines[line_number - 1])
+
+            print(f"Строка {line_number} успешно скопирована в {target_file}")
+        else:
+            print("Неверный номер строки")
+
+# Имя исходного файла
+source_filename = "phon.txt"
+
+# Имя целевого файла
+target_filename = "second_phon.txt"
+
+# Получаем от пользователя номер строки для копирования
+print ('вы желаете скопировать строку в новый файл? Введите 1, если да')
+d = int(input())
+if d == 1:
+    line_to_copy = int(input("Введите номер строки для копирования: "))
+    # Вызываем функцию копирования строки
+    copy_line(source_filename, target_filename, line_to_copy)
+else:
+    print('ну, нет, так нет')
+    
+#комит 5
